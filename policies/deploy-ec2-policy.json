@@ -1,0 +1,43 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAaccessForKeyAdministrators",
+            "Action": [
+                "kms:TagResource",
+                "kms:UntagResource",
+                "kms:ScheduleKeyDeletion",
+                "kms:CancelKeyDeletion"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowUseOfKey",
+            "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:GenerateDataKey"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowAttachmentOfPersistentResources",
+            "Action": [
+                "kms:CreateGrant",
+                "kms:RevokeGrant"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowSQSAccess",
+            "Effect": "Allow",
+            "Action": [
+                      "sqs:*"
+                    ],
+            "Resource": "arn:aws:sqs:${region}:${account_id}:*"
+        }
+    ]
+}
