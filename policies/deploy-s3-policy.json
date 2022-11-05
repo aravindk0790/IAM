@@ -1,0 +1,56 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAaccessForKeyAdministrators",
+            "Action": [
+                "kms:TagResource",
+                "kms:UntagResource",
+                "kms:ScheduleKeyDeletion",
+                "kms:CancelKeyDeletion"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowUseOfKey",
+            "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:GenerateDataKey"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowAttachmentOfPersistentResources",
+            "Action": [
+                "kms:CreateGrant",
+                "kms:RevokeGrant"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowS3permission",
+            "Action": [
+				"s3:PutObjectAcl",
+			    "s3:PutObject",
+			    "s3:ListBucket",
+                "s3:GetObject",
+                "s3-object-lambda:Get*",
+                "s3-object-lambda:List*"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::${tfstate_bucketname}-logs"
+        },
+        {
+            "Sid": "AllowSQSAccess",
+            "Effect": "Allow",
+            "Action": [
+                      "sqs:*"
+                    ],
+            "Resource": "arn:aws:sqs:${region}:${account_id}:*"
+        }
+    ]
+}
