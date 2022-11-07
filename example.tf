@@ -31,8 +31,8 @@ module "iam" {
       description = "ec2 access"
     }
   }
-  account_alias      = "csm"
-  application        = "cap"
+  account_alias      = "dwp"
+  application        = "adobe"
   role_name          = "pipeline-deploy-s3"
   assume_role_policy = data.aws_iam_policy_document.task_assume.json
   create_instance_profile = true
